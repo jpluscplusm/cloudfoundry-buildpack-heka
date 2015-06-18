@@ -27,7 +27,7 @@ TAR_ROOT="$(tar tfz "${HEKA_TGZ}" | head -1 | cut -f1 -d/)"
 tar xfz "${HEKA_TGZ}" \
   -C "${HEKA_ROOT}" \
   --strip-components 1 \
+  --wildcards \
   $TAR_ROOT{/bin/hekad,/lib,/share/heka/lua*}
 
-  #--wildcards \
 
