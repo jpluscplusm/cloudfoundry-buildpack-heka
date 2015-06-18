@@ -4,7 +4,7 @@
 set -ex
 
 BUILD_ROOT=$1
-HEKA_ROOT="${BUILD_ROOT}/.heroku/heka"
+HEKA_ROOT="/app/.heroku/heka"
 
 cat <<EOF
 ---
