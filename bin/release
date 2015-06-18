@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
+set -ex
+
 BUILD_ROOT=$(cd "$1/" && pwd)
 HEKA_ROOT="${BUILD_ROOT}/.heroku/heka"
 
