@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+[ $VERBOSE ] && set -x
+
+: ${HEKA_VERSION:=0.9.2}
+: ${HEKA_VERSION_UNDERSCORE:=$(echo "${HEKA_VERSION}" | tr '.' '_')}
+
+mkdir -p "$1" "$2"
+BUILD_ROOT=$(cd "$1/" && pwd)
+CACHE_ROOT=$(cd "$2/" && pwd)
+
+CACHE="${CACHE_ROOT}/heka"
+HEKA_ROOT="${BUILD_ROOT}/.heroku/heka"
+HEKA_TGZ="${CACHE}/${HEKA_VERSION}.tgz"
+
+mkdir -p "${CACHE}" "${HEKA_ROOT}"
+
+[ ! -s "${HEKA_TGZ}" ] && {
+  curl --location -s \
+    -o "${HEKA_TGZ}" \
+    https://github.com/mozilla-services/heka/releases/download/v${HEKA_VERSION}/heka-${HEKA_VERSION_UNDERSCORE}-linux-amd64.tar.gz
+}
+
+TAR_ROOT="$(tar tfz "${HEKA_TGZ}" | head -1 | cut -f1 -d/)"
+tar xfz "${HEKA_TGZ}" \
+  -C "${HEKA_ROOT}" \
+  --strip-components 1 \
+  $TAR_ROOT{/bin/hekad,/lib,/share/heka/lua*}
+
+  #--wildcards \
+

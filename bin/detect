@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+set -e
+[ $VERBOSE ] && set -x
+
+echo Heka
+exit 0

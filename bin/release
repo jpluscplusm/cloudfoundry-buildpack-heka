@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+BUILD_ROOT=$(cd "$1/" && pwd)
+HEKA_ROOT="${BUILD_ROOT}/.heroku/heka"
+
+cat <<EOF
+---
+config_vars:
+  PATH: ${HEKA_ROOT}:$PATH
+  HEKA_BASE_DIR: /tmp
+  HEKA_SHARE_DIR: ${HEKA_ROOT}/share/heka
+default_process_types:
+  web: hekad -config="${BUILD_ROOT}/config/"
+EOF
