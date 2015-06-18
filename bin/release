@@ -13,5 +13,5 @@ config_vars:
   HEKA_BASE_DIR: /tmp
   HEKA_SHARE_DIR: ${HEKA_ROOT}/share/heka
 default_process_types:
-  web: hekad -config="${BUILD_ROOT}/config/"
+  web: hekad -config="/app/config/"
 EOF
