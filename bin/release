@@ -3,7 +3,7 @@
 
 set -ex
 
-BUILD_ROOT=$(cd "$1/" && pwd)
+BUILD_ROOT=$1
 HEKA_ROOT="${BUILD_ROOT}/.heroku/heka"
 
 cat <<EOF
